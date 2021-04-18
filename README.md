@@ -23,7 +23,7 @@ The game rules are very easy:
 * You just have to play (by clicking on it in your cards) a card which suit (Spade, Heart, Diamond or Club) is same to the curent played card. If it happens that you don't have one of the same suit, you can take one of the already played cards (again, by clicking on it).
 * The raw ends when the last player has played or a card has been taken.
 * At the end of the raw, the player with higest card rank wins the raw and starts a new raw by playing a card of his choice.
-* When a player have played all his cards, he leaves the game.
+* When a player has played all his cards, he leaves the game.
 * Players are ordered by leaving order: the first player to leave is the first and the last to leave is the last.
 * In survival mode:
    * the last player to leave gets a *Yellow Card*,
