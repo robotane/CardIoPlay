@@ -20,7 +20,7 @@ It has a multiplayer mode: the two machine need to be connected to same network.
 
 The game rules are very easy:
 * At the beginning, a radom player plays a card of his choice
-* You just have to play (by clicking on it in your cards) a card which suit (Spade, Heart, Diamond or Club) is same to the curent played card. If it happens that you don't have one of the same suit, you can take one of the already played cards (again, by clicking on it), this end the raw.
+* You just have to play (by clicking on it in your cards) a card which suit (Spade, Heart, Diamond or Club) is same to the curent played card. If it happens that you don't have one of the same suit, you can take one of the already played cards (again, by clicking on it).
 * The raw ends when the last player has played or a card has been taken.
 * At the end of the raw, the player with higest card rank wins the raw and starts a new raw by playing a card of his choice.
 * When a player have played all his cards, he leaves the game.
