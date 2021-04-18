@@ -1,0 +1,43 @@
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+BLUE = (0, 0, 255)
+GREEN = (0, 255, 0)
+RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
+ORANGE = (255, 165, 0)
+VIOLET = (128, 0, 128)
+# SCREEN_WIDTH = 1000
+# SCREEN_HEIGHT = 700
+# DESK_WIDTH = 700
+# DESK_HEIGHT = 650
+
+SCREEN_WIDTH = 900
+SCREEN_HEIGHT = 700
+
+DESK_WIDTH = SCREEN_WIDTH - 210
+DESK_HEIGHT = SCREEN_HEIGHT - 100
+
+INTRO_SCREEN_WIDTH = int(SCREEN_WIDTH * 0.75)
+INTRO_SCREEN_HEIGHT = int(SCREEN_HEIGHT * 0.75)
+
+
+HOST = 'localhost'
+PORT = 2431
+TYPE_SERVER = "server"
+TYPE_CLIENT = "client"
+
+
+CLOVER = "Clover"
+DIAMOND = "Diamond"
+SPADE = "Spade"
+HEART = "Heart"
+KING = "King"
+QUEEN = "Queen"
+JAW = "Jaw"
+JOKER = "Joker"
+AS = "As"
+BACK = "back_2"
+
+color = (SPADE, CLOVER, DIAMOND, HEART)
+value = ("2", "3", "4", "5", "6", "7", "8", "9", "10", JAW, QUEEN, KING, AS)
+scale = 0.5
