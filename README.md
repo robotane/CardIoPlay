@@ -18,7 +18,7 @@ It has a multiplayer mode: the two machine need to be connected to same network.
 ![Playing a survival mode](https://github.com/robotane/CardIoPlay/blob/main/screen_shots/Screenshot%20at%202021-04-18%2022-19-32.png)
 
 
-The game rules are very simple:
+The game's rules are very simple:
 * At the beginning, a radom player plays a card of his choice
 * You just have to play (by clicking on it in your cards) a card which suit (Spade, Heart, Diamond or Club) is same to the curent played card. If it happens that you don't have one of the same suit, you can take one of the already played cards (again, by clicking on it).
 * The raw ends when the last player has played or a card has been taken.
