@@ -744,7 +744,7 @@ class Game(object):
                 else:
                     text2 = font.render("Out" if player.status != RED else "Not playing", True, t_color)
                 # pygame.draw.circle(screen, player.status, [int(player.pos[0] + 5), int(player.pos[1] - 60 + 14)], 10)
-                screen.blit(text, [player.pos[0] + 15, player.pos[1] - 60])
+                screen.blit(text, [player.pos[0] + (15 if self.survival_mode else 0), player.pos[1] - 60])
                 screen.blit(text2, [player.pos[0] + 6, player.pos[1] - 30])
             else:
                 if player.has_cards():
@@ -755,7 +755,7 @@ class Game(object):
                     text = font.render(
                         f"{player.name}                      {'Out' if player.score != -1 else 'Not playing'}",
                         True, t_color)
-                screen.blit(text, [player.pos[0] + 15, player.pos[1] - 40])
+                screen.blit(text, [player.pos[0] + (15 if self.survival_mode else 0), player.pos[1] - 40])
 
             # Display the status
             if self.survival_mode:
