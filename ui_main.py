@@ -257,8 +257,13 @@ class Game(object):
         player.cards_in_hand.empty()
         if self.survival_mode:
             if not self.survival_players or len(self.survival_players) > 2:
+                # A survival game is continuing
                 self.survival_players = [p for p in self.players if p.status != RED]
             else:
+                # A new game is starting
+                for p in self.players:
+                    # Resetting the status of all players
+                    p.status = GREEN
                 self.survival_players = self.players.copy()
             self.playing_players = self.survival_players.copy()
         else:
