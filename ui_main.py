@@ -744,17 +744,8 @@ class Game(object):
                 else:
                     text2 = font.render("Out" if player.status != RED else "Not playing", True, t_color)
                 # pygame.draw.circle(screen, player.status, [int(player.pos[0] + 5), int(player.pos[1] - 60 + 14)], 10)
-                screen.blit(text, [player.pos[0], player.pos[1] - 60])
+                screen.blit(text, [player.pos[0] + 15, player.pos[1] - 60])
                 screen.blit(text2, [player.pos[0] + 6, player.pos[1] - 30])
-                if self.survival_mode:
-                    t2_y = int(player.pos[1]) - 30
-                    t2_x = int(player.pos[0]) - 5
-                    pygame.draw.polygon(screen, player.status,
-                                        [(t2_x, t2_y + 6),
-                                         (t2_x + 10, t2_y + 6),
-                                         (t2_x + 10, t2_y + text.get_height() - 7),
-                                         (t2_x, t2_y + text.get_height() - 7),
-                                         ])
             else:
                 if player.has_cards():
                     text = font.render(
@@ -764,8 +755,33 @@ class Game(object):
                     text = font.render(
                         f"{player.name}                      {'Out' if player.score != -1 else 'Not playing'}",
                         True, t_color)
-                screen.blit(text, [player.pos[0], player.pos[1] - 40])
+                screen.blit(text, [player.pos[0] + 15, player.pos[1] - 40])
 
+            # Display the status
+            if self.survival_mode:
+                t2_y = int(player.pos[1]) - (60 if (player.name != "IA Show" and player.type != Player.HUMAN) else 40)
+                t2_x = int(player.pos[0]) - 5
+                rec_h = text.get_height() - 5
+                rec_w = text.get_height() - 10
+
+                pygame.draw.polygon(screen, BLACK,
+                                    [(t2_x, t2_y),
+                                     (t2_x + rec_w, t2_y),
+                                     (t2_x + rec_w, t2_y + rec_h),
+                                     (t2_x, t2_y + rec_h),
+                                     ])
+                sp = 2
+                t2_y += sp
+                t2_x += sp
+                rec_h -= 2 * sp
+                rec_w -= 2 * sp
+
+                pygame.draw.polygon(screen, player.status,
+                                    [(t2_x, t2_y),
+                                     (t2_x + rec_w, t2_y),
+                                     (t2_x + rec_w, t2_y + rec_h),
+                                     (t2_x, t2_y + rec_h),
+                                     ])
             # Draw player cards in hand on the screen
             player.draw(screen)
 
