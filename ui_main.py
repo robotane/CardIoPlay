@@ -82,6 +82,9 @@ class Game(object):
         self.nb_online = nb_online
         self.survival_mode = survival_mode
 
+        self.auto_mode = False
+        self.auto_mode_delay = 3  # seconds
+
         self.playing_players = []
         self.players = []
         if self.survival_mode:
@@ -274,6 +277,7 @@ class Game(object):
 
         self.def_init()
 
+
         if self.type is None or self.type == TYPE_SERVER:
             self.card_game.redo()
             # TODO Find a way to not repeat the following line (the first time is in the init method)
@@ -400,7 +404,7 @@ class Game(object):
         return sorted_players
 
     def update_cards_pos(self):
-        """Update the played cards positions to make them them tiny when tey are too much."""
+        """Update the played cards positions to make them tiny when tey are too much."""
         cards_copy = self.played_cards.copy()
         self.played_cards.empty()
         for card in cards_copy:
@@ -571,6 +575,12 @@ class Game(object):
         if self.game_over:
             self.played = False
             return
+        # Handling auto playing mode
+        if self.auto_mode and not self.end_raw:
+            if self.current_player.type != Player.HUMAN:
+                self.played = True
+            else:
+                pass  # TODO Pause the game for 'self.auto_mode_delay' seconds
         if self.played or (self.current_player.type == Player.ONLINE and online):
             if self.played:
                 self.game_stat.after_click = True
@@ -668,9 +678,9 @@ class Game(object):
                 self.current_player.remove_card(self.played_card)  # This will modify the value of self.played_card
                 if not self.best_card or self.get_value(tp_card) > self.get_value(self.best_card):
                     """If best_card is None, we will then initialize it else if and only if the value of the 
-                    played yard is greater than the best card value, we update the best card value to the played 
+                    played card is greater than the best card value, we update the best card value to the played 
                     card.
-                    Regarding the best player, we update the old value only the new best player has some cards in
+                    Regarding the best player, we update the old value only if the new best player has some cards in
                     his hand."""
                     self.best_card = tp_card
                     if self.type == TYPE_SERVER:
@@ -1012,6 +1022,10 @@ class GameStat(object):
                                        container=self.history_panel)
         self.quit_game_btn = UIButton(pygame.Rect((btn_panel_width - 150, btn_y), (100, 40)), 'QUIT', self.ui_manager,
                                       container=self.history_panel)
+        self.auto_play_btn = UIButton(pygame.Rect(((SCREEN_WIDTH - DESK_WIDTH)/2 - 50, SCREEN_HEIGHT - btn_y - 40),
+                                                  (100, 40)), 'AUTO ON' if self.game.auto_mode else 'AUTO OFF',
+                                      self.ui_manager,
+                                      container=self.info_panel)
 
     def process_event(self, event: pygame.event):
         if event.type == pygame.USEREVENT:
@@ -1023,6 +1037,10 @@ class GameStat(object):
                     self.game.go_home = True
                 elif event.ui_element == self.pause_game_btn:
                     self.game.paused = not self.game.paused
+                elif event.ui_element == self.auto_play_btn:
+                    self.game.auto_mode = not self.game.auto_mode
+                    self.auto_play_btn.set_text('AUTO ON' if self.game.auto_mode else 'AUTO OFF')
+
         self.ui_manager.process_events(event)
 
     def update(self, tick: int, screen: pygame.display):
