@@ -44,12 +44,6 @@ class Hand(pygame.sprite.Sprite):
         self.rect.y = pos[1]
 
 
-# TODO make a splash screen and a small menu to setup the game before it starts.
-
-# TODO Implement survival mode or level, the last player of each part leaves the game and the last player in the game
-#  will be the big  winner
-
-
 class Game(object):
     """ This class represents an instance of the game. If we need to
         reset the game we'd just need to create a new instance of this
@@ -119,9 +113,6 @@ class Game(object):
             self.current_player = self.playing_players[0]
             # self.playing_players = self.players.copy()
             if self.type == TYPE_SERVER:
-                # TODO Make a widows which will be shown while players are connecting, and
-                #  display connected players names. This windows will pass a socket object and a list of connected
-                #  players sockets to the game init method
                 for name, _ in sockets_list[1:]:
                     self.add_online_player_server(name)
                 # while self.added_online < self.nb_online:
@@ -166,7 +157,7 @@ class Game(object):
     def def_init(self):
         self.end_raw = False
         self.game_over = False
-        self.paused = True  # TODO Handle pause/unpause
+        self.paused = True
         self.played = False
         self.last_played_card = None
         self.best_card = None
@@ -280,9 +271,6 @@ class Game(object):
 
         if self.type is None or self.type == TYPE_SERVER:
             self.card_game.redo()
-            # TODO Find a way to not repeat the following line (the first time is in the init method)
-            # self.card_game.remove_values(JOKER, "2", "3", "4", "5")
-
             self.deals_all_cards()
         self.played_cards.empty()
 
@@ -707,7 +695,6 @@ class Game(object):
 
         """Here we remove all the playing_players which has not some cards in their hands from the list of "playing" 
         playing_players."""
-        # TODO Draw something on the screen when a player leaves the game
         winners = [p for p in self.playing_players if not p.has_cards()]
         w: Player
         if winners:
