@@ -70,7 +70,7 @@ class Game(object):
 
         self.played_pos = [100, 200]
         self.unplayed_pos = [100, 100]
-        self.ia_cards_pos = [Card(JOKER).rect.width * 1.5, self.played_pos[1] + Card(JOKER).rect.height * 1.6]
+        self.ia_cards_pos = [int(Card(JOKER).rect.width * 1.5), int(self.played_pos[1] + Card(JOKER).rect.height * 1.6)]
         self.human_cards_pos = [10, 50]
         self.def_init()
         self.nb_online = nb_online
@@ -319,7 +319,7 @@ class Game(object):
 
     def add_played_card(self, card: Card) -> None:
         """Add a card which have been played to the played card list"""
-        card.rect.x = self.played_pos[0] + 0.5 * card.rect.width * len(self.played_cards)
+        card.rect.x = self.played_pos[0] + card.rect.width * len(self.played_cards)//2
         card.rect.y = self.played_pos[1]
         self.played_cards.add(card)
 
@@ -396,7 +396,7 @@ class Game(object):
         cards_copy = self.played_cards.copy()
         self.played_cards.empty()
         for card in cards_copy:
-            card.rect.x = self.played_pos[0] + 0.5 * card.rect.width * len(self.played_cards)
+            card.rect.x = self.played_pos[0] + card.rect.width * len(self.played_cards)//2
             card.rect.y = self.played_pos[1]
             self.played_cards.add(card)
 
@@ -407,7 +407,7 @@ class Game(object):
         self.best_card = None
         self.last_played_card = None
         self.taken_card = None
-        self.played = False  # Thu
+        self.played = False
 
     def next_player(self) -> None:
         """Set the value of current_player to the player who follows the current one. If it's the last player, then the
@@ -798,7 +798,7 @@ class Game(object):
                                True,
                                pygame.Color("red"))
             center_x = DESK_WIDTH - text.get_width() - 10
-            center_y = self.played_pos[1] + (c.rect.height - text.get_height()) / 2
+            center_y = self.played_pos[1] + (c.rect.height - text.get_height()) // 2
             screen.blit(text, [center_x, center_y])
 
         # If a player won a raw, draw the name of the winner
@@ -811,7 +811,7 @@ class Game(object):
         # If the game is over, draw the name of the winner
         if self.score_windows is None and self.game_over:
             self.score_windows = ScoreWindow(self,
-                                             pygame.rect.Rect((SCREEN_WIDTH / 4, 0), (SCREEN_WIDTH / 2, DESK_HEIGHT)),
+                                             pygame.rect.Rect((SCREEN_WIDTH // 4, 0), (SCREEN_WIDTH // 2, DESK_HEIGHT)),
                                              self.game_stat.ui_manager)
 
         self.game_stat.update(60, screen)
@@ -898,7 +898,7 @@ class ScoreWindow(UIWindow):
                                      self.ui_manager,
                                      container=self,
                                      )
-        self.game_home_btn = UIButton(pygame.Rect((self.relative_rect.width / 2 - 50,
+        self.game_home_btn = UIButton(pygame.Rect((self.relative_rect.width // 2 - 50,
                                                    self.relative_rect.height - 140),
                                                   (100, 40)),
                                       'HOME',
@@ -1009,7 +1009,7 @@ class GameStat(object):
                                        container=self.history_panel)
         self.quit_game_btn = UIButton(pygame.Rect((btn_panel_width - 150, btn_y), (100, 40)), 'QUIT', self.ui_manager,
                                       container=self.history_panel)
-        self.auto_play_btn = UIButton(pygame.Rect(((SCREEN_WIDTH - DESK_WIDTH)/2 - 50, SCREEN_HEIGHT - btn_y - 40),
+        self.auto_play_btn = UIButton(pygame.Rect(((SCREEN_WIDTH - DESK_WIDTH)//2 - 50, SCREEN_HEIGHT - btn_y - 40),
                                                   (100, 40)), 'AUTO ON' if self.game.auto_mode else 'AUTO OFF',
                                       self.ui_manager,
                                       container=self.info_panel)
