@@ -1315,8 +1315,8 @@ class IntroScreen(object):
                         if self.player_type == "server":
                             if self.con_win is None or not self.con_win.alive():
                                 self.con_win = ConnectionWindow(g_args, self,
-                                                                pygame.rect.Rect((INTRO_SCREEN_WIDTH / 4, 0),
-                                                                                 (INTRO_SCREEN_WIDTH / 2, DESK_HEIGHT))
+                                                                pygame.rect.Rect((INTRO_SCREEN_WIDTH // 4, 0),
+                                                                                 (INTRO_SCREEN_WIDTH // 2, DESK_HEIGHT))
                                                                 , self.ui_manager)
                         else:
                             self.game = Game(**g_args)
