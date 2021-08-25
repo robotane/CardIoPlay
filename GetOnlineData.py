@@ -4,8 +4,7 @@
 
 import threading
 
-import ui_main
-from GameData import OnLinePlayer
+from playingcards import OnLinePlayer
 
 
 def send_message(socket_name, message):
@@ -22,7 +21,7 @@ class OnlinePlayerThread(threading.Thread):
     def __init__(self, thread_name, game, socket_name):
         threading.Thread.__init__(self, name=thread_name)
         self.socket_name = socket_name
-        self.game: ui_main.Game = game
+        self.game = game
 
     def run(self):
         while True:
@@ -87,7 +86,7 @@ class ServerThread(threading.Thread):
     def __init__(self, thread_name, game, socket_name):
         threading.Thread.__init__(self, name=thread_name)
         self.socket_name = socket_name
-        self.game: ui_main.Game = game
+        self.game = game
 
     def run(self):
         while True:
